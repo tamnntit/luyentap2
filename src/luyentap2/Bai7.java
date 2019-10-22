@@ -5,6 +5,7 @@
  */
 package luyentap2;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -12,33 +13,27 @@ import java.util.Scanner;
  * @author nntam
  */
 public class Bai7 {
-    static int n, a[];
+    static int n, a[], b[];
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int t = in.nextInt();
         while(t-- > 0) {
             n = in.nextInt();
-            a = new int[n+1];
+            
+            a = new int[n];
+            b = new int[n];
             for(int i = 0; i < n; i++) {
                 a[i] = in.nextInt();
+                b[i] = a[i];
             }
-            int max1 = 0;
-            for(int i = 0; i < n; i++) {
-                int key = a[i];
-                int j = n-1;
-                while(j > i && a[j] >= key) {
-                    j--;
-                }
-                if(j > i) {
-//                    System.out.println(i + ": " + j);
-                    int d = j-i+1;
-                    if(d > max1) {
-                        max1=  d;
-                    }
-                }
-                
-            }
-            System.out.println(max1 ==0?"YES":max1);
+            Arrays.sort(b);
+            int l = 0, r = n-1;
+            
+            while(l < n && a[l] == b[l]) l++;
+            while(r>=0 && a[r] == b[r]) r--;
+            int d = r-l+1;
+            
+            System.out.println(d <= 0?"YES":d);
         } 
             
     }
